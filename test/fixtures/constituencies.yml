@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  identifier: MyString
+  state: MyString
+  number: 1
+  winner: MyString
+  runner_up: MyString
+  winner_party: MyString
+  runner_up_party: MyString
+  poll_percent: 9.99
+  total_electors: 1
+  male: 9.99
+  female: 9.99
+
+two:
+  name: MyString
+  identifier: MyString
+  state: MyString
+  number: 1
+  winner: MyString
+  runner_up: MyString
+  winner_party: MyString
+  runner_up_party: MyString
+  poll_percent: 9.99
+  total_electors: 1
+  male: 9.99
+  female: 9.99

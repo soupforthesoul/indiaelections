@@ -1,4 +1,11 @@
 Indiaelections::Application.routes.draw do
+  resources :constituencies do
+    collection { post :import }
+    collection { get :destroyall }
+  end
+  
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

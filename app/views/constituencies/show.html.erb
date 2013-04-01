@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @constituency.name %>
+</p>
+
+<p>
+  <b>Identifier:</b>
+  <%= @constituency.identifier %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%= @constituency.state %>
+</p>
+
+<p>
+  <b>Number:</b>
+  <%= @constituency.number %>
+</p>
+
+<p>
+  <b>Winner:</b>
+  <%= @constituency.winner %>
+</p>
+
+<p>
+  <b>Runner up:</b>
+  <%= @constituency.runner_up %>
+</p>
+
+<p>
+  <b>Winner party:</b>
+  <%= @constituency.winner_party %>
+</p>
+
+<p>
+  <b>Runner up party:</b>
+  <%= @constituency.runner_up_party %>
+</p>
+
+<p>
+  <b>Poll percent:</b>
+  <%= @constituency.poll_percent %>
+</p>
+
+<p>
+  <b>Total electors:</b>
+  <%= @constituency.total_electors %>
+</p>
+
+<p>
+  <b>Male:</b>
+  <%= @constituency.male %>
+</p>
+
+<p>
+  <b>Female:</b>
+  <%= @constituency.female %>
+</p>
+
+
+<%= link_to 'Edit', edit_constituency_path(@constituency) %> |
+<%= link_to 'Back', constituencies_path %>
