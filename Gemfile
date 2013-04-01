@@ -10,6 +10,9 @@ gem 'spreadsheet'
 
 
 
+group :production do
+  gem 'pg'
+end
 
 gem 'roo'
 gem 'rspec'
