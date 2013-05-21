@@ -10,8 +10,8 @@ class MpsController < ApplicationController
   end
 
   def index
-    @mps = Mp.all
-    @constituencies = Constituency.all
+    @mps = Mp.find_each
+    @constituencies = Constituency.find_each
 
     respond_to do |format|
       format.html # index.html.erb

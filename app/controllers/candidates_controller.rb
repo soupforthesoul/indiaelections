@@ -2,7 +2,7 @@ class CandidatesController < ApplicationController
   # GET /candidates
   # GET /candidates.json
   def index
-    @candidates = Candidate.all
+    @candidates = Candidate.find_each
     
     
     respond_to do |format|

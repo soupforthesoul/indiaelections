@@ -17,7 +17,7 @@ before_filter :authenticate, :only => [:edit, :destroy, :destroyall, :new, :impo
 
   def index
     @constituencies = Constituency.all
-    @mps = Mp.all
+    
     
     respond_to do |format|
       format.html # index.html.erb
