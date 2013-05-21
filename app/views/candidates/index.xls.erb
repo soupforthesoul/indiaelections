@@ -1,0 +1,21 @@
+<table border="1">
+    <tr>
+    <th>Name</th>
+    <th>Party</th>
+    <th>Age</th>
+    <th>Bio</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @candidates.each do |candidate| %>
+  <tr>
+    <td><%= candidate.name %></td>
+    <td><%= candidate.party %></td>
+    <td><%= candidate.age %></td>
+    <td><%= candidate.bio %></td>
+    
+  </tr>
+<% end %>
+</table>

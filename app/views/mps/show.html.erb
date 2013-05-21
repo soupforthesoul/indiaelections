@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @mp.name %>
+</p>
+
+<p>
+  <b>Party:</b>
+  <%= @mp.party %>
+</p>
+
+<p>
+  <b>Bio:</b>
+  <%= @mp.bio %>
+</p>
+
+<p>
+  <b>Age:</b>
+  <%= @mp.age %>
+</p>
+
+<p>
+  <b>Id parliament:</b>
+  <%= @mp.id_parliament %>
+</p>
+
+<p>
+  <b>Current:</b>
+  <%= @mp.current %>
+</p>
+
+<p>
+  <b>Affidavit 2009:</b>
+  <%= @mp.affidavit_2009 %>
+</p>
+
+<p>
+  <b>State 2009:</b>
+  <%= @mp.state_2009 %>
+</p>
+
+<p>
+  <b>Constituency 2009:</b>
+  <%= @mp.constituency_2009 %>
+</p>
+
+
+<%= link_to 'Edit', edit_mp_path(@mp) %> |
+<%= link_to 'Back', mps_path %>

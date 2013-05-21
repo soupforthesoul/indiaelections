@@ -1,4 +1,17 @@
-Indiaelections::Application.routes.draw do
+Indiaelections::Application.routes.draw do 
+ 
+
+
+
+  resources :mps do
+    collection { post :import }
+    collection { get :destroyall }
+  end
+
+
+  resources :candidates
+
+
   resources :constituencies do
     collection { post :import }
     collection { get :destroyall }
@@ -55,9 +68,14 @@ Indiaelections::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'constituencies#index'
 
   # See how all your routes lay out with "rake routes"
+
+
+
+
+
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

@@ -1,0 +1,54 @@
+<h1>Listing mps</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Party</th>
+    <th>Bio</th>
+    <th>Age</th>
+    <th>Id parliament</th>
+    <th>Current</th>
+    <th>Affidavit Link</th>
+    <th>State</th>
+    <th>Constituency</th>
+    <th>MyNetaId</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @mps.each do |mp| %>
+  <tr>
+    <td><%= mp.name %></td>
+    <td><%= mp.party %></td>
+    <td><%= mp.bio %></td>
+    <td><%= mp.age %></td>
+    <td><%= mp.id_parliament %></td>
+    <td><%= mp.current %></td>
+    <td><a href="<%= mp.affidavit_2009%>">Link</a></td>
+    <td><%= Constituency.find(mp.id).state %></td>
+    <td><%= Constituency.find(mp.id).name %></td>
+    <td><%= mp.mynetaid %></td>
+    <td><%= link_to 'Show', mp %></td>
+    <td><%= link_to 'Edit', edit_mp_path(mp) %></td>
+    
+  </tr>
+<% end %>
+</table>
+
+<h2>Import MPs</h2>
+
+<%= form_tag import_mps_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+
+<br />
+
+ <p>
+  Download:
+  <%= link_to "CSV", mps_path(format: "csv") %> |
+  <%= link_to "Excel", mps_path(format: "xls") %> | 
+  <%= link_to "ExcelX", mps_path(format: "xlsx") %>
+</p>
+
+<%= link_to 'New Mp', new_mp_path %>

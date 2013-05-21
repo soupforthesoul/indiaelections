@@ -1,0 +1,53 @@
+<%= form_for(@mp) do |f| %>
+  <% if @mp.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mp.errors.count, "error") %> prohibited this mp from being saved:</h2>
+
+      <ul>
+      <% @mp.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :party %><br />
+    <%= f.text_field :party %>
+  </div>
+  <div class="field">
+    <%= f.label :bio %><br />
+    <%= f.text_area :bio %>
+  </div>
+  <div class="field">
+    <%= f.label :age %><br />
+    <%= f.number_field :age %>
+  </div>
+  <div class="field">
+    <%= f.label :id_parliament %><br />
+    <%= f.number_field :id_parliament %>
+  </div>
+  <div class="field">
+    <%= f.label :current %><br />
+    <%= f.check_box :current %>
+  </div>
+  <div class="field">
+    <%= f.label :affidavit_2009 %><br />
+    <%= f.text_field :affidavit_2009 %>
+  </div>
+  <div class="field">
+    <%= f.label :state_2009 %><br />
+    <%= f.text_field :state_2009 %>
+  </div>
+  <div class="field">
+    <%= f.label :constituency_2009 %><br />
+    <%= f.text_field :constituency_2009 %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

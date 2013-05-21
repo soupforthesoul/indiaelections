@@ -1,0 +1,29 @@
+<table border="1">
+   <tr>
+    <th>name</th>
+    <th>party</th>
+    <th>bio</th>
+    <th>age</th>
+    <th>id_parliament</th>
+    <th>current</th>
+    <th>affidavit_2009</th>
+    <th>state_2009</th>
+    <th>constituency_2009</th>
+   
+  </tr>
+
+<% @mps.each do |mp| %>
+  <tr>
+    <td><%= mp.name %></td>
+    <td><%= mp.party %></td>
+    <td><%= mp.bio %></td>
+    <td><%= mp.age %></td>
+    <td><%= mp.id_parliament %></td>
+    <td><%= mp.current %></td>
+    <td><%= mp.affidavit_2009%></td>
+    <td><%= Constituency.find(mp.id).state %></td>
+    <td><%= Constituency.find(mp.id).name %></td>
+    
+  </tr>
+<% end %>
+</table>

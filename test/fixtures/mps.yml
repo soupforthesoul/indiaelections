@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  party: MyString
+  bio: MyText
+  age: 1
+  id_parliament: 1
+  current: false
+
+two:
+  name: MyString
+  party: MyString
+  bio: MyText
+  age: 1
+  id_parliament: 1
+  current: false

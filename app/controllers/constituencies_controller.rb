@@ -1,6 +1,12 @@
 class ConstituenciesController < ApplicationController
   # GET /constituencies
   # GET /constituencies.json
+  
+before_filter :authenticate, :only => [:edit, :destroy, :destroyall, :new, :import, :update, :show]
+
+
+
+
   def import
 
    Constituency.import(params[:file])
@@ -11,7 +17,8 @@ class ConstituenciesController < ApplicationController
 
   def index
     @constituencies = Constituency.all
-
+    @mps = Mp.all
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @constituencies }
@@ -97,5 +104,14 @@ class ConstituenciesController < ApplicationController
     
   end
 
+
+
+  protected
+
+    def authenticate
+      authenticate_or_request_with_http_basic do |username, password|
+        username == "foo" && password == "bar"
+      end
+    end
 
 end
