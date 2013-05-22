@@ -1,0 +1,185 @@
+
+
+ $(document).ready(function(){
+            var inkscape_label;
+            var moveLeft = 0;
+          var moveDown = 25;
+          var image;
+         
+            
+            
+
+  $("g").mouseenter(function(e) {
+     if($(this).attr("inkscape:label"))
+          {inkscape_label= $(this).attr("inkscape:label");
+            
+            var d = new Date();
+            var t = d.getTime();
+           
+            var link_mp_constituency;
+                            var link_mp_netaid;
+                
+             
+
+    <% Constituency.find_each do |constituency| %>
+                    var tempor = "<%=constituency.name%>";
+                    if(tempor==inkscape_label||tempor+" "==inkscape_label)
+                    {
+                      switch ("<%=constituency.winner_party %>")
+                            {
+                            case "INC":
+                              image='<%=image_tag("INC.png")%>';
+                              break;
+                            case "BJP":
+                              image='<%=image_tag("BJP.png")%>';
+                              break;
+                            case "BSP":
+                              image='<%=image_tag("BSP.gif")%>';
+                              break;
+                            case "SP":
+                              image='<%=image_tag("SP.gif")%>';
+                              break;
+                            case "JD(U)":
+                              image='<%=image_tag("JDU.png")%>';
+                              break;
+                            case "JKN":
+                              image='<%=image_tag("JKN.png")%>';
+                              break;
+                            case "NCP":
+                              image='<%=image_tag("NCP.png")%>';
+                              break;
+                            case "RJD":
+                              image='<%=image_tag("RJD.png")%>';
+                              break;
+                            case "SDF":
+                              image='<%=image_tag("SDF.png")%>';
+                              break;
+                            case "AITC":
+                              image='<%=image_tag("TMC.png")%>';
+                              break;
+                            case "CPI":
+                              image='<%=image_tag("CPI.png")%>';
+                              break;
+                            case "CPM":
+                              image='<%=image_tag("CPM.gif")%>';
+                              break;
+                            case "SHS":
+                              image='<%=image_tag("SHS.jpg")%>';
+                              break;
+                            case "SAD":
+                              image='<%=image_tag("SAD.png")%>';
+                              break;
+                            case "DMK":
+                              image='<%=image_tag("DMK.jpg")%>';
+                              break;
+                            case "ADMK":
+                              image='<%=image_tag("ADMK.png")%>';
+                              break;
+                            case "MDMK":
+                              image='<%=image_tag("MDMK.png")%>';
+                              break;
+                            case "PMK":
+                              image='<%=image_tag("PMK.png")%>';
+                              break;
+                            case "TDP":
+                              image='<%=image_tag("TDP.png")%>';
+                              break;
+                            case "RLD":
+                              image='<%=image_tag("RLD.png")%>';
+                              break;
+                            case "BJD":
+                              image='<%=image_tag("BJD.jpg")%>';
+                              break;
+                            case "JD(S)":
+                              image='<%=image_tag("JDS.jpg")%>';
+                              break;
+                            default:
+                              image="";
+
+                            }
+                            
+                            <% Mp.find_each do |mp| %>
+                                if("<%=mp.name%>"=="<%=constituency.winner %>")
+                                  {link_mp_constituency="<%=mp.id_parliament%>";
+                                link_mp_netaid="<%=mp.mynetaid%>";}
+                             <% end %>
+                         
+                      
+                  $.ajax({
+      url: "/constituencies",
+    type: "POST",
+    data: {html: inkscape_label},
+    success: function(resp){ $('#MyAuction-BidHistory').html(image+inkscape_label+ " " +"<%=constituency.id%>" + " <%=constituency.winner%>" + " <%=constituency.winner_party%> " + "<img src='http://164.100.47.132/mpimage/photo/"+link_mp_constituency+".jpg' class='MP_Portrait'/>").css({
+            'display': 'block',
+            'top': e.pageY + moveDown,
+            'left': e.pageX + moveLeft
+
+        }).stop().fadeIn(2);}
+
+    });
+
+ $(".ui-dialog-content").dialog("close");
+                    
+                    
+                    
+                  
+
+                             $('<div />').html("<iframe src='http://myneta.info/ls2009/candidate.php?candidate_id="+link_mp_netaid+"' height='950' width='750'"+inkscape_label +"<%= constituency.id%>" + " <%=constituency.winner%>" + " <%=constituency.winner_party%> " + "<a href='http://164.100.47.132/LssNew/Members/Biography.aspx?mpsno="+link_mp_constituency+"'' target='_blank'><img src='http://164.100.47.132/mpimage/photo/"+link_mp_constituency+".jpg' class='MP_Portrait'/></a> ").dialog({ width: 800 }, { height: 1000 }, {position: { my: "right top", at: "right top", of: window } });
+                    
+
+                  
+                    } //if statement end of tempor
+
+                   
+                    
+                    
+                <% end %>
+ 
+
+
+
+
+  } //if
+
+});
+
+
+    $("g").mouseout(function() {if($(this).attr("inkscape:label"))
+    {
+
+        $('#MyAuction-BidHistory').fadeOut(2);
+
+      }
+    }); 
+
+
+
+            
+            /*$("svg rect").click(function() {
+              alert($(this).attr("id"));
+   alert($(this).attr("inkscape:label")); 
+});*/
+
+
+
+
+
+
+
+
+
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+        });
