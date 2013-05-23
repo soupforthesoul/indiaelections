@@ -7,7 +7,8 @@ class Mp < ActiveRecord::Base
   header = spreadsheet.row(1)
   (2..spreadsheet.last_row).each do |i|
     row = Hash[[header, spreadsheet.row(i)].transpose]
-    mp = find_by_name(row["name"]) || new
+     # mp = find_by_name(row["name"]) || new
+     mp=Mp.new
     mp.attributes = row.to_hash.slice(*accessible_attributes)
     mp.save!
   end

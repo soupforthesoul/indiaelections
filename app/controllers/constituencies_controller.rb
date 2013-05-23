@@ -4,7 +4,10 @@ class ConstituenciesController < ApplicationController
   
 before_filter :authenticate, :only => [:edit, :destroy, :destroyall, :new, :import, :update, :show]
 
-
+def action
+  @constituency = Constituency.relationships.build(:followed_id => params[:id])
+  render :index, :layout => false
+end
 
 
   def import
