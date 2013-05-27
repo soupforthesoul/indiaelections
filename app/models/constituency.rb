@@ -3,6 +3,15 @@ class Constituency < ActiveRecord::Base
 
 validates :name, :presence => true
 
+def self.search(search)
+  if search
+    where('name LIKE ?', "%#{search}%")
+  else
+    scoped
+  end
+  end
+
+
 def self.import(file)
   spreadsheet = open_spreadsheet(file)
   # header = spreadsheet.row(1)

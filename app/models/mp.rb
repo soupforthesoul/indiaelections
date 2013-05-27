@@ -2,6 +2,15 @@ class Mp < ActiveRecord::Base
   attr_accessible :age, :bio, :current, :id_parliament, :name, :party, :affidavit_2009, :state_2009, :constituency_2009, :mynetaid
   validates :name, :presence => true
 
+  def self.search(search)
+  if search
+    where('constituency_2009 LIKE ?', "%#{search}%")
+  else
+    scoped
+  end
+	end
+
+
 	def self.import(file)
 		spreadsheet = open_spreadsheet(file)
   header = spreadsheet.row(1)

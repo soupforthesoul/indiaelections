@@ -10,7 +10,10 @@ class MpsController < ApplicationController
   end
 
   def index
-    @mps = Mp.all
+    
+    @mps = Mp.search(params[:search])
+
+    
    
 
     respond_to do |format|

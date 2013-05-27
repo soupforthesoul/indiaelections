@@ -19,7 +19,7 @@ before_filter :authenticate, :only => [:edit, :destroy, :destroyall, :new, :impo
   end
 
   def index
-    @constituencies = Constituency.all
+    @constituencies = Constituency.search(params[:search])
     
     
     respond_to do |format|
