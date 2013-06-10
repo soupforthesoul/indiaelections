@@ -4,6 +4,7 @@ class ConstituenciesController < ApplicationController
   
 before_filter :authenticate, :only => [:edit, :destroy, :destroyall, :new, :import, :update, :show]
 
+# caches_page :index
 # def action
 #   @constituency = Constituency.relationships.build(:followed_id => params[:id])
 #   render :index, :layout => false
@@ -19,12 +20,14 @@ before_filter :authenticate, :only => [:edit, :destroy, :destroyall, :new, :impo
   end
 
   def index
-    @constituencies = Constituency.search(params[:search])
+    @constituencies = Constituency.search(params[:search] )
     
     
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @constituencies }
+       format.xls # { send_data @equipment.to_csv(col_sep: "\t") }
+      format.xlsx # { send_data @equipment.to_csv(col_sep: "\t") }
     end
   end
 
@@ -60,6 +63,11 @@ before_filter :authenticate, :only => [:edit, :destroy, :destroyall, :new, :impo
   def create
     @constituency = Constituency.new(params[:constituency])
 
+
+    # expire_page :action => :index
+
+
+    
     respond_to do |format|
       if @constituency.save
         format.html { redirect_to @constituency, notice: 'Constituency was successfully created.' }

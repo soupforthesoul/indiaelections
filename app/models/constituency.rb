@@ -2,12 +2,13 @@ class Constituency < ActiveRecord::Base
   attr_accessible :female, :identifier, :male, :name, :number, :poll_percent, :runner_up, :runner_up_party, :state, :total_electors, :winner, :winner_party
 
 validates :name, :presence => true
+DEFAULT_SEARCH_PARAMETERS = {:search => 'Ladakh'}
 
 def self.search(search)
   if search
     where('name LIKE ?', "%#{search}%")
-  else
-    scoped
+   else
+     scoped
   end
   end
 

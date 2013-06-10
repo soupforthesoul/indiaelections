@@ -1,0 +1,38 @@
+<table border="1">
+   <tr>
+    <th>name</th>
+    <th>identifier</th>
+    <th>state</th>
+    <th>number</th>
+    <th>winner</th>
+    <th>runner_up</th>
+    <th>winner_party</th>
+    <th>runner_up_party</th>
+    <th>poll_percent</th>
+    <th>total_electors</th>
+    <th>male</th>
+    <th>female</th>
+   
+  </tr>
+
+<% @constituencies.each do |constituency| %>
+  <tr>
+    <td><%= constituency.name %></td>
+    <td><%= constituency.identifier %></td>
+    <td><%= constituency.state %></td>
+    <td><%= constituency.number %></td>
+    <td><%= constituency.winner %></td>
+    <td><%= constituency.runner_up %></td>
+    <td><%= constituency.winner_party %></td>
+    <td><%= constituency.runner_up_party %></td>
+    <td><%= constituency.poll_percent %></td>
+     <td><%= constituency.total_electors  %></td>
+    <td><%= constituency.male %></td>
+    <td><%= constituency.female %></td>
+    
+    
+  </tr>
+<% end %>
+</table>
+
+
