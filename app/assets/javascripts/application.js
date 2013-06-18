@@ -13,3 +13,16 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$(function() {
+  $("#search").change(function() {
+    // $.getScript(this.href);
+    $.get($("#constituencies_search").attr("action"), null, "script");
+    
+    return false;
+  });
+  $("#constituencies_search input").keyup(function() {
+    $.get($("#constituencies_search").attr("action"), $("#constituencies_search").serialize(), null, "script");
+    return false;
+  });
+});

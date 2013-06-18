@@ -1,0 +1,135 @@
+<table>
+   
+  <% for constituency in @constituencies %>
+  <tr>
+    <td class="pretty"><%= constituency.name %></td>
+    
+<script type="text/javascript">
+
+var image;
+
+
+           
+           
+
+
+            var d = new Date();
+            var t = d.getTime();
+           
+            var link_mp_constituency;
+                            var link_mp_netaid;
+                
+//              $.ajax({
+//   data: 'id=' + id,
+//   dataType: 'script',
+//   type: 'post',
+//   url: "/constituencies/action"
+// });
+
+
+
+    
+                   
+
+                      switch ("<%=constituency.winner_party %>")
+                            {
+                            case "INC":
+                              image='<%=image_tag("INC.png")%>';
+                              break;
+                            case "BJP":
+                              image='<%=image_tag("BJP.png")%>';
+                              break;
+                            case "BSP":
+                              image='<%=image_tag("BSP.gif")%>';
+                              break;
+                            case "SP":
+                              image='<%=image_tag("SP.gif")%>';
+                              break;
+                            case "JD(U)":
+                              image='<%=image_tag("JDU.png")%>';
+                              break;
+                            case "JKN":
+                              image='<%=image_tag("JKN.png")%>';
+                              break;
+                            case "NCP":
+                              image='<%=image_tag("NCP.png")%>';
+                              break;
+                            case "RJD":
+                              image='<%=image_tag("RJD.png")%>';
+                              break;
+                            case "SDF":
+                              image='<%=image_tag("SDF.png")%>';
+                              break;
+                            case "AITC":
+                              image='<%=image_tag("TMC.png")%>';
+                              break;
+                            case "CPI":
+                              image='<%=image_tag("CPI.png")%>';
+                              break;
+                            case "CPM":
+                              image='<%=image_tag("CPM.gif")%>';
+                              break;
+                            case "SHS":
+                              image='<%=image_tag("SHS.jpg")%>';
+                              break;
+                            case "SAD":
+                              image='<%=image_tag("SAD.png")%>';
+                              break;
+                            case "DMK":
+                              image='<%=image_tag("DMK.jpg")%>';
+                              break;
+                            case "ADMK":
+                              image='<%=image_tag("ADMK.png")%>';
+                              break;
+                            case "MDMK":
+                              image='<%=image_tag("MDMK.png")%>';
+                              break;
+                            case "PMK":
+                              image='<%=image_tag("PMK.png")%>';
+                              break;
+                            case "TDP":
+                              image='<%=image_tag("TDP.png")%>';
+                              break;
+                            case "RLD":
+                              image='<%=image_tag("RLD.png")%>';
+                              break;
+                            case "BJD":
+                              image='<%=image_tag("BJD.jpg")%>';
+                              break;
+                            case "JD(S)":
+                              image='<%=image_tag("JDS.jpg")%>';
+                              break;
+                            default:
+                              image="";
+
+                            }
+                            
+                            
+                            
+                                  {
+                                    link_mp_constituency="<%=Mp.find(constituency.id).id_parliament%>";
+                                link_mp_netaid="<%=Mp.find(constituency.id).mynetaid%>";}
+     $.ajax({
+      url: "/constituencies",
+    type: "POST",
+    data: {},
+    success: function(resp){ $('#MyAuction-BidHistory').html("<%=constituency.id%>" + " <%=constituency.winner%>" + " <%=constituency.winner_party%> " + "<img src='http://164.100.47.132/mpimage/photo/"+link_mp_constituency+".jpg' class='MP_Portrait'/>").css({
+            'display': 'block',
+            'top': e.pageY + moveDown,
+            'left': e.pageX + moveLeft
+
+        }).stop().fadeIn(0);}
+
+    });
+     $(".test").remove();
+   
+                    
+                 
+                  
+
+                             $('<div class="test" />').html("<iframe id='Mynetaframe' src='http://myneta.info/ls2009/candidate.php?candidate_id="+link_mp_netaid+"#main' height='500' width='600'></iframe>").dialog({ width: 600 }, { height: 500 }, {position: [1000,0] });
+                            
+     </script>
+  </tr>
+  <% end %>
+</table>

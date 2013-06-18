@@ -25,6 +25,7 @@ before_filter :authenticate, :only => [:edit, :destroy, :destroyall, :new, :impo
     
     respond_to do |format|
       format.html # index.html.erb
+      format.js # index.js.erb 
       format.json { render json: @constituencies }
        format.xls # { send_data @equipment.to_csv(col_sep: "\t") }
       format.xlsx # { send_data @equipment.to_csv(col_sep: "\t") }
