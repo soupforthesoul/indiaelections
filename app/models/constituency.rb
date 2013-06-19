@@ -6,9 +6,9 @@ DEFAULT_SEARCH_PARAMETERS = {:search => 'Ladakh'}
 
 def self.search(search)
   if search
-    where('name LIKE ?', "%#{search}%")
+    where('name LIKE ?', "#{search}")
    else
-     where('name LIKE ?', "Ladakh_")
+     where('name = ?', "Ladakh_")
   end
   end
 
