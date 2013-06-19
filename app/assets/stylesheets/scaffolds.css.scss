@@ -13,7 +13,8 @@ p, ol, ul, td {
   font-size: 13px;
   line-height: 18px;
   margin-top:0px;
-  
+  padding:0px;
+  border: 0px;
 }
 
 pre {
@@ -38,7 +39,8 @@ a {  margin-top:0px;
 }
 
 div {  margin-top:0px;
-  
+  padding:0px;
+  border: 0px;
   &.field, &.actions {
     margin-bottom: 10px;
   }
