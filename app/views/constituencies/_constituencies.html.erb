@@ -113,7 +113,11 @@ var image;
       url: "/constituencies",
     type: "POST",
     data: {html: image},
+<<<<<<< HEAD
     success: function(resp){ $('#MyAuction-BidHistory').html(image+ "<%=constituency.name%>"+ " " + " <%=constituency.winner%>" + " <%=constituency.winner_party%> " + "<img src='http://164.100.47.132/mpimage/photo/"+link_mp_constituency+".jpg' class='MP_Portrait'/>").css({
+=======
+    success: function(resp){ $('#MyAuction-BidHistory').html(image + "<%=constituency.name%>"+ " " + " <%=constituency.winner%>" + " <%=constituency.winner_party%> " + "<img src='http://164.100.47.132/mpimage/photo/"+link_mp_constituency+".jpg' class='MP_Portrait'/>").css({
+>>>>>>> added party image to popup
             'display': 'block',
             'top': e.pageY + moveDown,
             'left': e.pageX + moveLeft
@@ -121,6 +125,20 @@ var image;
         }).stop().fadeIn(0);}
 
     });
+
+ // $.ajax({
+ //      url: "/constituencies",
+ //    type: "POST",
+ //    data: {},
+ //    success: function(resp){ $('#testing_div').html("testing_div").css({
+ //            'display': 'block',
+ //            'top': e.pageY + moveDown,
+ //            'left': e.pageX + moveLeft
+
+ //        }).stop().fadeIn(0);}
+
+ //    });
+
      $(".test").remove();
    
                     
