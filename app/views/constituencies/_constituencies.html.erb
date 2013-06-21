@@ -114,7 +114,7 @@ var image;
     type: "POST",
     data: {html: image},
 
-    success: function(resp){ $('#Popup').html(image + "<%=constituency.name%>"+ " " + " <%=constituency.winner%>" + " <%=constituency.winner_party%> " + "<img src='http://164.100.47.132/mpimage/photo/"+link_mp_constituency+".jpg' class='MP_Portrait'/>").css({
+    success: function(resp){ $('#Popup').html("Constituency: <%=constituency.name%>" + "<div>MP: <%=constituency.winner%> </div>" + "<div>Party: <%=constituency.winner_party%> "+image+"</div> " + "<img src='http://164.100.47.132/mpimage/photo/"+link_mp_constituency+".jpg' class='MP_Portrait'/>").css({
             'display': 'block',
             'top': e.pageY + moveDown,
             'left': e.pageX + moveLeft
