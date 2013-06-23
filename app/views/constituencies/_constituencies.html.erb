@@ -114,7 +114,7 @@ var image;
     type: "POST",
     data: {html: image},
 
-    success: function(resp){ $('#Popup').html("Constituency: <%=constituency.name%>" + "<div>MP: <%=constituency.winner%> </div>" + "<div>Party: <%=constituency.winner_party%> "+image+"</div> " + "<img src='http://164.100.47.132/mpimage/photo/"+link_mp_constituency+".jpg' class='MP_Portrait'/>"  + "<a target='_blank' href='http://164.100.47.132/LssNew/Members/Biography.aspx?mpsno="+link_mp_constituency+"' style= 'color:red '>MP's Parliament Webpage</a>").css({
+    success: function(resp){ $('#Popup').html("Constituency: <%=constituency.name%>" + "<div>MP: <%=constituency.winner%> </div>" + "<div>Party: <%=constituency.winner_party%> "+image+"</div> " + "<img src='http://164.100.47.132/mpimage/photo/"+link_mp_constituency+".jpg' class='MP_Portrait'/>"  + "<a id='linktoparliament' target='_blank' href='http://164.100.47.132/LssNew/Members/Biography.aspx?mpsno="+link_mp_constituency+"' style= 'color:red '>MP's Parliament Webpage</a>").css({
             'display': 'block',
             'top': e.pageY + moveDown,
             'left': e.pageX + moveLeft
@@ -142,7 +142,7 @@ var image;
                  
                   
 
-                             $('<div class="test" />').html("<iframe id='Mynetaframe' src='http://myneta.info/ls2009/candidate.php?candidate_id="+link_mp_netaid+"#main' height='500' width='600'></iframe>").dialog({ width: 600 }, { height: 500 }, {position: [1000,0] });
+                             $('<div class="test" />').html("<iframe id='Mynetaframe' src='http://myneta.info/ls2009/candidate.php?candidate_id="+link_mp_netaid+"#main' height='1000' width='600'></iframe>").dialog({ width: 600 }, { height: 1000 }, {position: [1000,0] });
                             
      </script>
   </tr>

@@ -1,0 +1,135 @@
+<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+
+
+<style type="text/css">
+
+g:not(#viewport) :hover {
+  opacity: 0.95;
+ fill: black;
+/* stroke: black;
+  stroke-width: "10"*/
+}
+
+
+
+      #Popup {
+        color: #30434C;
+    position:absolute;
+    margin-left:3px;
+    z-index:400;    
+    background-color:rgba(153,153,153,0.8);
+   font-weight:bold;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    width:217px;
+     margin-top:0px;
+  padding:0px;
+  border: 0px;
+
+}
+    </style>
+
+ 
+
+ <style type="text/css">
+ 
+
+iframe{ background: white;
+  height:1000px;
+   width:600px;
+padding:0px;
+  border: 0px;
+}
+
+ .ui-dialog-title {
+display:none;
+
+  padding:0px;
+  border: 0px;
+
+}
+
+ .ui-dialog-content {
+  background: white;
+   margin-top:0px;
+  padding:0px;
+  border: 0px;
+  
+ }
+
+ .ui-dialog .ui-dialog-titlebar-close { 
+background: #999999;
+
+position: absolute; 
+left: -40px; 
+top: 20px; 
+
+ margin-top:0px;
+  padding:0px;
+  border: 2px;
+
+}
+
+
+      .MP_Portrait {
+        
+    
+    width:100px;
+    height:150px;
+    display: block;
+margin: 0 auto;
+}
+
+.pretty {
+        
+    
+   display: none;
+
+}
+
+#header {
+height: 110px;
+width: 100%;
+position: fixed;
+/*background: #B0B0B0;
+*/background:#90C9E5;
+color: #30434C;
+
+
+}
+
+#constituencies_search {
+  
+  
+}
+
+#viewport_svg{
+  margin-top: 110px;
+}
+
+
+
+#linktoparliament {
+
+	/*-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #383838 ), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #383838  5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#383838 ', endColorstr='#dfdfdf');*/
+	background-color:#383838 ;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid black;
+	display:block;
+	color:red;
+	font-family:arial;
+	font-weight:bold;
+	/*padding:6px 24px;*/
+	text-decoration:none;
+/*	text-shadow:1px 1px 0px #ffffff;*/
+	margin: 0 auto;
+}
+
+</style>
