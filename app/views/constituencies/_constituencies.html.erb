@@ -114,7 +114,7 @@ var image;
     type: "POST",
     data: {html: image},
 
-    success: function(resp){ $('#Popup').html("Constituency: <%=constituency.name%>" + "<div>MP: <%=constituency.winner%> </div>" + "<div>Party: <%=constituency.winner_party%> "+image+"</div> " + "<img src='http://164.100.47.132/mpimage/photo/"+link_mp_constituency+".jpg' class='MP_Portrait'/>"  + "<a id='linktoparliament' target='_blank' href='http://164.100.47.132/LssNew/Members/Biography.aspx?mpsno="+link_mp_constituency+"' style= 'color:red '>MP's Parliament Webpage</a>").css({
+    success: function(resp){ $('#Popup').html("Constituency: <%=constituency.name%>" + "<div> ID: "+id_const+"</div>"+ "<div>MP: <%=constituency.winner%> </div>" + "<div>Party: <%=constituency.winner_party%> "+image+"</div> " + "<img src='http://164.100.47.132/mpimage/photo/"+link_mp_constituency+".jpg' class='MP_Portrait'/>"  + "<a id='linktoparliament' target='_blank' href='http://164.100.47.132/LssNew/Members/Biography.aspx?mpsno="+link_mp_constituency+"' style= 'color:red '>MP's Parliament Webpage</a>").css({
             'display': 'block',
             'top': e.pageY + moveDown,
             'left': e.pageX + moveLeft

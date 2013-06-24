@@ -17,7 +17,8 @@ g:not(#viewport) :hover {
     margin-left:3px;
     z-index:400;    
     background-color:rgba(153,153,153,0.8);
-   font-weight:bold;
+/*   font-weight:bold;*/
+font-family: sans-serif;
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
     width:217px;
@@ -119,8 +120,8 @@ color: #30434C;
 	border:1px solid black;
 	display:block;
 	color:red;
-	font-family:arial;
-	font-weight:bold;
+	
+/*	font-weight:bold;*/
 	/*padding:6px 24px;*/
 	text-decoration:none;
 /*	text-shadow:1px 1px 0px #ffffff;*/
