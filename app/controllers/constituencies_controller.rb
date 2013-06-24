@@ -4,7 +4,8 @@ class ConstituenciesController < ApplicationController
   
 before_filter :authenticate, :only => [:edit, :destroy, :destroyall, :new, :import, :update, :show]
 
-# caches_page :index
+caches_page :index, :gzip => :best_speed
+
 # def action
 #   @constituency = Constituency.relationships.build(:followed_id => params[:id])
 #   render :index, :layout => false
