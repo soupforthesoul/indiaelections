@@ -21,7 +21,7 @@ Indiaelections::Application.configure do
   config.assets.digest = true
 
   
-  config.assets.precompile = ['*.js', '*.css']
+  config.assets.precompile = ['*.js', '*.css' , '*.png', '*.gif', '*.jpg']
 
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
