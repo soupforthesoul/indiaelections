@@ -1,0 +1,630 @@
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<!doctype html>
+<html>
+<head>
+  <title>Indiaelections</title>
+  <link href="/assets/application.css?body=1" media="all" rel="stylesheet" type="text/css">
+</link>
+  <link href="/assets/font.css?body=1" media="all" rel="stylesheet" type="text/css" >
+  </link>
+  
+  
+  <script src="/assets/jquery.js?body=1" type="text/javascript"></script>
+  <script src="/assets/jquery_ujs.js?body=1" type="text/javascript"></script>
+  <script src="/assets/constituencies.js?body=1" type="text/javascript"></script>
+  <script src="/assets/application.js?body=1" type="text/javascript"></script>
+  <meta content="authenticity_token" name="csrf-param" >
+  <meta content="WGSBiZpayfVkU4k2AmuanP1cbI3TO+f/oaxNFfEf2TI=" name="csrf-token" >
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
+  <script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+  <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+  </link>
+   <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-41880867-1', 'aboutmymp.com');
+  ga('send', 'pageview');
+
+  </script>
+  <style> polygon, path{
+    stroke:black;
+    stroke-width:0.25;
+
+  }
+
+
+  </style>
+
+
+
+
+ 
+
+
+
+  <script type="text/javascript">
+
+  var id_const;
+
+  $(document).ready(function()
+
+  { 
+/** 
+ *  SVGPan library 1.2.2
+ * ======================
+ *
+ * Given an unique existing element with id "viewport" (or when missing, the 
+ * first g-element), including the the library into any SVG adds the following 
+ * capabilities:
+ *
+ *  - Mouse panning
+ *  - Mouse zooming (using the wheel)
+ *  - Object dragging
+ *
+ * You can configure the behaviour of the pan/zoom/drag with the variables
+ * listed in the CONFIGURATION section of this file.
+ *
+ * Known issues:
+ *
+ *  - Zooming (while panning) on Safari has still some issues
+ *
+ * Releases:
+ *
+ * 1.2.2, Tue Aug 30 17:21:56 CEST 2011, Andrea Leofreddi
+ *  - Fixed viewBox on root tag (#7)
+ *  - Improved zoom speed (#2)
+ *
+ * 1.2.1, Mon Jul  4 00:33:18 CEST 2011, Andrea Leofreddi
+ *  - Fixed a regression with mouse wheel (now working on Firefox 5)
+ *  - Working with viewBox attribute (#4)
+ *  - Added "use strict;" and fixed resulting warnings (#5)
+ *  - Added configuration variables, dragging is disabled by default (#3)
+ *
+ * 1.2, Sat Mar 20 08:42:50 GMT 2010, Zeng Xiaohui
+ *  Fixed a bug with browser mouse handler interaction
+ *
+ * 1.1, Wed Feb  3 17:39:33 GMT 2010, Zeng Xiaohui
+ *  Updated the zoom code to support the mouse wheel on Safari/Chrome
+ *
+ * 1.0, Andrea Leofreddi
+ *  First release
+ *
+ * This code is licensed under the following BSD license:
+ *
+ * Copyright 2009-2010 Andrea Leofreddi <a.leofreddi@itcharm.com>. All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ * 
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ * 
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY Andrea Leofreddi ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL Andrea Leofreddi OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * 
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of Andrea Leofreddi.
+ */
+
+ "use strict";
+
+/// CONFIGURATION 
+/// ====>
+
+var enablePan = 1; // 1 or 0: enable or disable panning (default enabled)
+var enableZoom = 1; // 1 or 0: enable or disable zooming (default enabled)
+var enableDrag = 1; // 1 or 0: enable or disable dragging (default disabled)
+var zoomScale = 0.5; // Zoom sensitivity
+
+/// <====
+/// END OF CONFIGURATION 
+
+// var root = document.documentElement;
+var root = document.getElementById('viewport_svg');
+
+var state = 'none', svgRoot = null, stateTarget, stateOrigin, stateTf;
+
+setupHandlers(root);
+
+/**
+ * Register handlers
+ */
+ function setupHandlers(root){
+  setAttributes(root, {
+    // "onmouseup" : "handleMouseUp(evt)",
+    // "onmousedown" : "handleMouseDown(evt)",
+    // "onmousemove" : "handleMouseMove(evt)",
+    //"onmouseout" : "handleMouseUp(evt)", // Decomment this to stop the pan functionality when dragging out of the SVG element
+  });
+
+  // if(navigator.userAgent.toLowerCase().indexOf('webkit') >= 0)
+  //   root.addEventListener('mousewheel', handleMouseWheel, false); // Chrome/Safari
+  // else
+  //   root.addEventListener('DOMMouseScroll', handleMouseWheel, false); // Others
+
+
+  if (root.addEventListener) {    // all browsers except IE before version 9
+                    // Internet Explorer, Opera, Google Chrome and Safari
+                root.addEventListener ("mousewheel", handleMouseWheel, false);
+                    // Firefox
+                root.addEventListener ("DOMMouseScroll", handleMouseWheel, false);
+            }
+            else {
+                if (root.attachEvent) { // IE before version 9
+                    root.attachEvent ("onmousewheel", handleMouseWheel);
+                }
+
+
+}
+}
+
+/**
+ * Retrieves the root element for SVG manipulation. The element is then cached into the svgRoot global variable.
+ */
+ function getRoot(root) {
+  if(svgRoot == null) {
+    var r = root.getElementById("viewport") ? root.getElementById("viewport") : root.documentElement, t = r;
+
+    while(t != root) {
+      if(t.getAttribute("viewBox")) {
+        setCTM(r, t.getCTM());
+
+        t.removeAttribute("viewBox");
+      }
+
+      t = t.parentNode;
+    }
+
+    svgRoot = r;
+  }
+
+  return svgRoot;
+}
+
+/**
+ * Instance an SVGPoint object with given event coordinates.
+ */
+ function getEventPoint(evt) {
+  var p = root.createSVGPoint();
+
+  p.x = evt.clientX;
+  p.y = evt.clientY;
+
+  return p;
+}
+
+/**
+ * Sets the current transform matrix of an element.
+ */
+ function setCTM(element, matrix) {
+  var s = "matrix(" + matrix.a + "," + matrix.b + "," + matrix.c + "," + matrix.d + "," + matrix.e + "," + matrix.f + ")";
+
+  element.setAttribute("transform", s);
+}
+
+/**
+ * Dumps a matrix to a string (useful for debug).
+ */
+ function dumpMatrix(matrix) {
+  var s = "[ " + matrix.a + ", " + matrix.c + ", " + matrix.e + "\n  " + matrix.b + ", " + matrix.d + ", " + matrix.f + "\n  0, 0, 1 ]";
+
+  return s;
+}
+
+/**
+ * Sets attributes of an element.
+ */
+ function setAttributes(element, attributes){
+  for (var i in attributes)
+    element.setAttributeNS(null, i, attributes[i]);
+}
+
+/**
+ * Handle mouse wheel event.
+ */
+ function handleMouseWheel(evt) {
+  if(!enableZoom)
+    return;
+
+  if(evt.preventDefault)
+    evt.preventDefault();
+
+  evt.returnValue = false;
+
+  var svgDoc = evt.target.ownerDocument;
+
+  var delta;
+
+  if(evt.wheelDelta)
+    delta = evt.wheelDelta / 360; // Chrome/Safari
+  else
+    delta = evt.detail / -9; // Mozilla
+
+  var z = Math.pow(1 + zoomScale, delta);
+
+  var g = getRoot(svgDoc);
+  
+  var p = getEventPoint(evt);
+
+  p = p.matrixTransform(g.getCTM().inverse());
+
+  // Compute new scale matrix in current mouse position
+  var k = root.createSVGMatrix().translate(p.x, p.y).scale(z).translate(-p.x, -p.y);
+
+  setCTM(g, g.getCTM().multiply(k));
+
+  if(typeof(stateTf) == "undefined")
+    stateTf = g.getCTM().inverse();
+
+  stateTf = stateTf.multiply(k.inverse());
+}
+
+/**
+ * Handle mouse move event.
+ */
+// function handleMouseMove(evt) {
+//   if(evt.preventDefault)
+//     evt.preventDefault();
+
+//   evt.returnValue = false;
+
+//   var svgDoc = evt.target.ownerDocument;
+
+//   var g = getRoot(svgDoc);
+
+//   if(state == 'pan' && enablePan) {
+//     // Pan mode
+//     var p = getEventPoint(evt).matrixTransform(stateTf);
+
+//     setCTM(g, stateTf.inverse().translate(p.x - stateOrigin.x, p.y - stateOrigin.y));
+//   } else if(state == 'drag' && enableDrag) {
+//     // Drag mode
+//     var p = getEventPoint(evt).matrixTransform(g.getCTM().inverse());
+
+//     setCTM(stateTarget, root.createSVGMatrix().translate(p.x - stateOrigin.x, p.y - stateOrigin.y).multiply(g.getCTM().inverse()).multiply(stateTarget.getCTM()));
+
+//     stateOrigin = p;
+//   }
+// }
+
+// /**
+//  * Handle click event.
+//  */
+// function handleMouseDown(evt) {
+//   if(evt.preventDefault)
+//     evt.preventDefault();
+
+//   evt.returnValue = false;
+
+//   var svgDoc = evt.target.ownerDocument;
+
+//   var g = getRoot(svgDoc);
+
+//   if(
+//     evt.target.tagName == "svg" 
+//     || !enableDrag // Pan anyway when drag is disabled and the user clicked on an element 
+//   ) {
+//     // Pan mode
+//     state = 'pan';
+
+//     stateTf = g.getCTM().inverse();
+
+//     stateOrigin = getEventPoint(evt).matrixTransform(stateTf);
+//   } else {
+//     // Drag mode
+//     state = 'drag';
+
+//     stateTarget = evt.target;
+
+//     stateTf = g.getCTM().inverse();
+
+//     stateOrigin = getEventPoint(evt).matrixTransform(stateTf);
+//   }
+// }
+
+// /**
+//  * Handle mouse button release event.
+//  */
+// function handleMouseUp(evt) {
+//   if(evt.preventDefault)
+//     evt.preventDefault();
+
+//   evt.returnValue = false;
+
+//   var svgDoc = evt.target.ownerDocument;
+
+//   if(state == 'pan' || state == 'drag') {
+//     // Quit pan mode
+//     state = '';
+//   }
+// }
+
+
+}
+);
+
+
+</script>
+
+
+
+
+
+<script type="text/javascript">
+var first=true;
+
+$(document).ready(function(){ 
+
+
+       // var xyz= function(){  
+
+
+        var inkscape_label;
+        var id_of_constituency;
+        var moveLeft = 0;
+        var moveDown = -25;
+        var image;
+
+        $("g").mouseenter(function(e) {
+
+         ($('#Popup:hover').length != 0)
+         {
+           if($(this).attr("inkscape:label"))
+            {inkscape_label= $(this).attr("inkscape:label");
+          id_const=$(this).attr("id");
+          document.body.style.cursor='pointer';
+
+          $.ajax({
+            url: "/constituencies",
+            type: "POST",
+            data: {html: inkscape_label},
+            success: function(resp){ $("#Popup").html("Constituency: "+inkscape_label+ "<div> ID: "+id_const+"</div>").css({
+              'display': 'inline',
+              'top': e.pageY + moveDown,
+              'left': e.pageX + moveLeft
+
+            }).stop().fadeIn(0);}
+
+          });
+
+
+
+        }
+
+      }
+    });
+
+
+
+
+
+        $("g").click(function(e) {
+         if($(this).attr("inkscape:label"))
+          {inkscape_label= $(this).attr("inkscape:label");
+
+
+
+        $('#search_field').val(inkscape_label);
+            // document.getElementById('search').setAttribute('value', inkscape_label);
+
+            $("#submit_button").click();
+
+//             $('#constituencies_search').submit(function() {  
+//     var valuesToSubmit = $(this).serialize();
+//     $.ajax({
+//         url: $(this).attr('action'), //sumbits it to the given url of the form
+//         data: search,
+//         dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+//     }).success(function(json){
+//         //act on result.
+//     });
+//     return false; // prevents normal behaviour
+// });
+
+
+
+
+        var d = new Date();
+        var t = d.getTime();
+
+        var link_mp_constituency;
+        var link_mp_netaid;
+
+//              $.ajax({
+//   data: 'id=' + id,
+//   dataType: 'script',
+//   type: 'post',
+//   url: "/constituencies/action"
+// });
+
+
+
+
+
+
+
+  } //if
+  
+
+});
+
+
+    // $("g").mouseout(function() {if($(this).attr("inkscape:label"))
+    // { 
+
+    //     $('#Popup').fadeOut(0);
+    //     document.body.style.cursor='default';
+    //   }
+    // }); 
+
+
+
+
+            /*$("svg rect").click(function() {
+              alert($(this).attr("id"));
+   alert($(this).attr("inkscape:label")); 
+ });*/
+
+
+
+
+});
+
+
+
+// };
+
+
+// window.setInterval(function(){
+//   xyz();
+// }, 5000);
+</script>
+
+</head>
+<body>
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+<!-- Instructions for website use -->
+<div id='header'>
+
+  <p>
+    Access details from their 2009 Lok Sabha Affidavit including cash position, property owned, and liabilities
+  </p>
+
+  <form accept-charset="UTF-8" action="/constituencies" data-remote="true" id="constituencies_search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+    <p>
+      <input id="search_field" name="search" type="text" />
+      <input id="submit_button" type="submit" value="Search" />
+    </p>
+  </form> </div>
+
+
+  <!--  -->
+
+  <!-- SEARCH FUNCTION -->
+
+
+
+
+
+  <!-- END OF SEARCH FUNCTION -->
+
+  <div id="Popup"></div>
+
+  <div id="constituencies"><table>
+
+  </table></div>
+
+
+
+
+  <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+  <!-- Generator: Adobe Illustrator 15.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+  <svg>
+ 
+
+  <g id="viewport">
+   
+
+<g
+id="HimachalPradesh1"
+inkscape:label="Kangra">
+
+<defs
+id="defs3010">
+<rect
+id="SVGID_1_"
+x="-5"
+y="-227"
+width="839.544"
+height="1187.812" />
+</defs>
+<clipPath
+id="SVGID_2_">
+<use
+xlink:href="#SVGID_1_"
+overflow="visible"
+id="use3014" />
+</clipPath>
+<polygon
+fill="#F8EFA5"
+points="268.368,45.652 268.848,45.892 268.848,46.132              268.848,46.372 269.088,46.132 269.088,46.372 269.088,46.612 269.808,47.094 270.288,47.094 270.528,46.852              271.249,46.852 271.488,46.612 271.729,46.612 271.968,46.612 272.448,46.612 272.448,47.332 272.448,47.572              272.448,48.052 272.208,48.292 271.968,49.492 272.208,50.452 272.448,50.692 272.448,51.172 272.688,51.413              272.928,51.413 272.928,51.893 272.688,51.893 272.688,52.132 272.688,52.373 272.928,52.373 272.928,52.853              273.168,52.853 272.928,53.094 272.928,53.333 272.688,53.572 272.688,53.812 272.448,54.052 271.729,53.812              271.488,54.052 271.488,54.292 271.249,54.292 271.008,55.252 270.768,55.493 270.768,55.732 270.288,56.212              269.808,56.453 269.568,55.973 268.848,56.212 268.608,56.212 268.368,56.212 268.128,56.453 267.648,56.933              267.408,56.933 267.168,57.172 266.688,57.172 266.208,57.413 265.728,57.413 265.008,57.413 265.008,57.172              265.248,56.933 265.008,56.692 264.768,55.973 264.528,55.732 264.288,56.212 263.808,56.212 263.328,56.692              262.848,56.933 262.848,57.413 263.088,57.653 263.088,57.893 263.088,58.133 263.328,58.853 263.328,59.094              263.328,59.573 264.048,60.053 264.048,60.532 263.808,60.773 264.288,61.013 264.528,61.013 264.528,61.253              264.048,61.733 263.808,61.973 264.048,62.453 264.048,62.693 264.288,62.933 264.048,63.173 263.328,63.413              263.088,63.173 263.088,62.933 262.848,62.933 261.888,63.413 261.648,63.893 261.408,64.373 261.168,64.373              260.928,64.373 260.688,64.613 260.208,65.094 259.728,65.094 259.488,65.094 259.488,66.053 259.728,66.053              259.488,66.293 259.728,66.293 259.968,66.293 260.208,66.532 259.968,66.773 259.728,66.773 259.488,66.773              259.008,67.013 258.768,66.773 258.528,66.773 258.288,66.773 258.048,66.773 257.808,66.532 257.568,66.293              257.328,66.053 257.328,65.573 257.088,65.573 256.848,65.813 257.088,66.053 256.848,66.532 256.608,66.773              256.608,67.253 256.368,67.493 256.368,67.733 256.608,68.213 256.848,68.213 257.328,68.213 257.568,68.453              257.568,68.693 257.808,68.693 258.528,69.173 259.488,69.173 259.488,69.653 259.728,69.653 259.968,69.893              260.208,70.133 260.448,70.853 260.688,70.853 261.168,70.853 261.408,71.333 261.888,71.094 262.128,72.053              262.608,72.293 263.328,72.773 263.328,73.013 263.568,73.253 264.048,73.013 264.288,73.493 264.768,73.733              264.768,73.493 265.008,73.493 265.248,73.973 265.488,74.213 265.968,73.973 265.968,74.213 266.448,74.213              266.688,74.213 266.688,74.454 266.928,74.213 267.408,74.454 267.888,74.934 267.888,75.173 268.368,75.173              268.368,75.414 269.088,75.653 269.328,75.894 269.568,75.894 270.048,75.173 270.528,75.173 270.768,75.414              271.008,75.653 271.249,75.173 271.488,75.173 271.729,74.934 271.968,74.693 271.968,74.454 271.968,74.213              271.968,73.973 272.208,73.973 271.968,73.733 272.208,73.493 271.968,72.773 272.208,72.293 271.968,72.053              272.448,71.813 272.208,71.573 271.968,71.094 271.729,70.853 271.729,70.613 271.968,70.613 272.208,70.373              272.448,70.133 272.448,69.893 272.448,69.413 272.688,69.173 272.928,69.173 273.168,68.933 273.168,68.693              273.648,68.213 273.888,68.213 274.608,67.733 275.568,67.493 275.809,67.733 275.568,67.973 275.329,68.213              275.809,68.453 275.568,68.933 276.048,69.173 276.528,68.693 276.528,69.413 277.008,69.653 277.489,69.413              277.729,69.413 277.969,69.173 278.688,68.933 278.929,68.933 279.168,68.693 279.409,69.173 279.889,69.173              279.889,69.413 279.648,69.893 278.929,70.613 278.929,71.094 278.929,71.333 279.168,71.333 279.409,71.573              279.409,72.293 278.688,72.532 278.688,73.013 278.449,73.493 278.449,73.733 278.449,73.973 278.449,74.213              278.449,74.454 278.688,74.454 278.929,74.693 278.929,74.934 278.688,75.414 278.208,75.414 277.969,75.414              277.729,75.414 277.489,75.653 277.489,75.894 277.489,76.133 277.249,76.374 277.249,76.854 277.249,77.094              277.249,77.333 277.008,77.333 277.249,78.054 277.008,78.054 276.048,78.054 276.048,78.293 275.809,78.534              276.048,79.014 276.048,79.253 275.809,79.494 275.568,79.494 275.329,79.494 275.088,79.494 274.608,79.494              274.128,79.734 273.888,79.734 273.648,79.974 273.408,79.974 273.168,79.734 272.688,79.253 272.688,79.014              272.448,79.014 272.208,79.014 271.968,79.253 271.729,79.253 271.488,79.494 271.008,79.974 271.008,80.213              270.768,80.213 270.528,80.213 270.288,79.974 270.288,79.734 270.048,79.734 269.808,79.494 269.328,79.734              269.328,79.974 269.328,79.734 269.088,80.213 269.088,80.694 269.568,81.894 269.808,82.135 269.568,81.894              269.568,82.135 269.568,82.374 269.568,82.614 269.808,82.854 269.568,83.334 269.568,83.573 269.328,83.814              269.328,84.054 269.328,84.294 269.328,84.534 269.328,84.774 269.088,84.774 268.848,84.774 268.128,84.534              267.888,84.294 267.408,84.054 267.168,84.054 266.928,84.054 266.208,84.294 265.488,85.014 265.248,85.494              265.008,85.494 264.768,85.734 264.288,85.734 264.048,85.734 264.048,85.974 264.288,86.214 264.288,86.454              264.048,86.454 263.808,86.214 263.808,86.454 263.568,86.454 263.328,86.694 263.328,86.214 263.088,86.694              262.608,86.694 262.608,86.934 262.608,87.174 262.368,86.694 262.128,86.694 261.888,86.934 261.648,87.414              261.408,87.174 261.168,86.694 260.448,87.174 259.968,87.174 259.728,86.694 259.488,86.214 259.728,86.214              259.488,85.974 259.248,85.734 259.008,85.734 258.768,85.494 258.288,85.014 258.528,84.774 258.528,84.534              258.768,84.534 259.008,84.774 259.248,84.534 259.248,84.294 259.488,83.573 259.248,83.334 259.008,82.854              259.008,82.614 259.008,82.135 258.768,81.894 258.768,81.654 258.528,81.414 258.288,80.934 258.288,80.454              258.048,79.974 257.808,80.213 257.568,79.734 257.328,79.734 257.568,79.734 257.328,79.494 257.328,79.253              257.088,79.014 257.088,78.534 256.848,78.054 256.608,78.054 256.368,77.813 256.128,77.813 255.888,77.813              255.648,77.573 255.648,77.813 255.888,78.293 255.648,78.293 255.888,78.773 255.648,78.534 255.408,78.773              255.648,78.773 255.408,79.014 254.928,79.253 254.928,79.494 254.928,79.253 254.688,79.253 254.448,79.253              254.448,79.014 254.928,78.773 254.928,78.534 254.688,78.534 254.448,78.534 254.448,78.293 254.208,78.534              254.208,78.293 253.968,78.293 254.208,78.293 253.968,78.054 253.968,77.813 254.208,77.813 254.208,77.573              253.968,77.813 253.968,77.573 253.968,77.813 253.728,77.813 253.728,77.333 253.488,77.094 253.488,76.613              253.248,76.613 253.248,76.374 253.008,76.374 253.008,76.613 253.008,77.094 253.248,77.333 253.248,77.573              253.248,77.813 253.008,77.813 252.768,78.054 252.288,78.054 252.048,77.573 252.288,77.333 251.808,76.613              252.048,77.094 251.808,77.333 252.048,77.333 252.048,77.573 251.808,77.573 251.808,78.054 252.048,78.054              251.808,78.293 252.048,78.293 252.048,78.534 251.808,78.534 252.048,78.534 251.808,78.534 251.808,78.773              252.048,78.773 252.288,79.014 252.048,79.014 251.808,79.014 252.048,79.253 251.568,79.253 252.048,79.494              251.808,79.253 251.808,79.494 252.048,79.734 251.808,79.734 252.048,79.974 251.568,79.734 251.568,79.974              251.568,79.734 251.328,79.734 251.568,79.974 251.328,79.974 251.568,79.974 251.808,79.974 252.048,80.213              251.808,80.213 252.048,80.454 251.808,80.454 251.808,80.694 251.808,80.454 251.808,80.213 251.808,80.454              251.568,80.213 251.808,80.694 251.568,80.454 251.568,80.213 251.568,80.454 251.328,80.213 251.328,80.454              251.568,80.454 251.808,80.694 251.808,80.934 251.568,80.934 251.568,80.694 251.568,80.934 251.568,80.694              251.328,80.694 251.328,80.934 251.328,81.174 250.848,81.174 250.848,81.654 250.127,81.654 249.647,81.174              248.928,80.934 248.928,80.694 248.208,80.694 247.728,80.213 247.008,79.734 246.527,78.773 246.288,79.014              245.808,79.014 245.567,78.773 245.328,78.534 245.087,78.293 244.607,78.054 244.607,77.813 244.127,77.813              243.647,77.813 243.408,77.813 242.927,78.054 242.688,77.813 242.688,77.333 242.927,77.333 243.408,77.094              243.408,76.854 243.408,76.374 244.368,75.894 244.607,75.414 244.607,75.173 244.607,74.693 244.368,74.693              244.607,74.454 244.368,74.454 244.368,74.213 243.888,74.213 243.888,74.454 243.647,74.454 243.647,73.733              243.888,73.493 243.888,73.253 243.408,73.013 244.127,72.532 244.368,72.773 246.047,72.053 246.768,72.053              247.248,71.573 247.488,71.094 247.968,70.613 248.448,70.613 248.208,70.133 248.448,69.893 248.688,69.893              248.928,69.653 249.167,69.893 249.408,69.173 249.647,68.933 249.888,68.693 250.368,68.693 250.608,68.693              250.848,68.693 251.088,68.693 251.328,68.933 251.328,68.693 251.568,68.933 251.568,68.693 251.088,68.213              251.088,67.733 250.848,67.493 250.848,67.013 250.127,66.773 249.888,66.293 249.647,66.053 249.408,65.333              249.167,65.333 249.167,65.094 249.167,64.853 249.647,64.853 249.647,64.373 250.127,64.133 250.127,63.893              250.368,63.653 250.368,63.173 250.608,62.933 250.848,62.933 251.088,62.693 251.088,62.453 251.328,62.213              251.328,61.973 251.328,61.733 251.568,61.733 251.568,61.973 251.808,61.973 251.568,61.733 251.808,61.493              251.568,61.493 251.328,61.493 251.328,61.253 251.088,61.013 250.848,61.253 250.608,61.253 250.848,60.532              250.848,60.293 251.088,60.053 250.848,59.813 251.328,59.333 251.568,59.094 251.568,58.613 251.568,58.373              251.088,57.893 251.088,57.653 250.848,57.413 250.848,56.933 250.608,56.453 250.368,56.453 250.368,56.212              250.127,55.732 249.888,55.732 249.647,55.493 249.408,55.493 249.408,55.252 249.167,55.252 249.167,55.013              248.928,55.013 248.928,54.532 248.688,54.292 249.167,54.052 249.408,53.572 249.647,53.094 249.888,53.094              250.127,53.094 250.608,53.333 251.088,53.572 251.328,53.572 251.808,53.812 252.048,54.292 252.528,54.772              253.248,54.532 253.248,54.292 253.728,54.052 253.968,53.812 254.448,53.572 254.688,53.572 254.688,53.333              254.688,53.094 255.408,52.853 255.408,52.612 255.888,52.612 255.888,52.373 256.128,52.373 256.368,51.652              256.368,51.413 256.608,51.172 257.328,50.932 257.808,51.172 258.048,51.172 258.288,50.692 258.768,50.932              259.008,50.932 259.248,50.692 259.968,50.692 260.208,50.452 260.688,50.452 260.688,49.972 261.168,49.732              261.168,49.492 260.928,49.252 260.928,49.012 261.168,48.531 260.928,48.531 261.408,48.052 262.128,47.812              262.608,47.332 263.088,47.094 263.328,46.612 264.048,46.132 264.288,46.132 264.528,46.132 264.768,46.372              265.248,46.372 265.488,46.372 265.968,46.372 266.688,45.892 266.928,45.892 267.408,45.892 267.648,45.892              267.888,45.652            "
+id="polygon3016" />
+
+</g>
+
+
+
+
+   <!-- <text
+   xml:space="preserve"
+   style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+   x="596.43445"
+   y="858.09143"
+   id="text40652"
+   sodipodi:linespacing="125%"><tspan
+     sodipodi:role="line"
+     id="tspan40654"
+     x="596.43445"
+     y="858.09143">Independent</tspan></text> -->
+   
+</g>
+</svg>
+
+
+
+<!-- <h1>Listing constituencies</h1>
+<p>
+  Download:
+  <a href="/constituencies.csv">CSV</a> |
+  <a href="/constituencies.xls">Excel</a> | 
+  <a href="/constituencies.xlsx">ExcelX</a>
+</p>
+
+
+
+ <a href="/constituencies/destroyall" class="someclass" data-confirm="Are you sure?">Delete All</a>
+
+<br />
+
+
+<h2>Import Constituencies</h2>
+
+<form accept-charset="UTF-8" action="/constituencies/import" enctype="multipart/form-data" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="WGSBiZpayfVkU4k2AmuanP1cbI3TO+f/oaxNFfEf2TI=" /></div>
+  <input id="file" name="file" type="file" />
+  <input name="commit" type="submit" value="Import" />
+</form><div id="MyAuction-BidHistory"></div>
+
+<a href="/constituencies/new">New Constituency</a> -->
+
+
+
+</body>
+</html>
