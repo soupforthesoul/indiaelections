@@ -38,10 +38,8 @@ padding-top: 31px;
 g:not(#viewport) :hover {
   opacity: 0.95;
  fill: black;
-/* stroke: black;
-  stroke-width: "10"*/
-}
 
+}
 
 
       #Popup {
